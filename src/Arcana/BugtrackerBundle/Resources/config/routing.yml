@@ -1,0 +1,37 @@
+root:
+    path: /
+    defaults:
+        _controller: ArcanaBugtrackerBundle:Bugs:list
+        path: /bugs
+        permanent: true
+
+login:
+    path:     /login
+    defaults: { _controller: ArcanaBugtrackerBundle:Security:login }
+login_check:
+    path: /login_check
+
+logout:
+    path:   /logout
+
+bugs_list:
+    path:     /bugs/
+    defaults: { _controller: ArcanaBugtrackerBundle:Bugs:list }
+bugs_add:
+    path:     /bugs/add
+    defaults: { _controller: ArcanaBugtrackerBundle:Bugs:add }
+
+projects_list:
+    path:     /projects/
+    defaults: { _controller: ArcanaBugtrackerBundle:Projects:list }
+
+users_list:
+    path:     /users/
+    defaults: { _controller: ArcanaBugtrackerBundle:Users:list }
+
+statuses_list:
+    path:     /statuses/
+    defaults: { _controller: ArcanaBugtrackerBundle:Statuses:list }
+
+
+

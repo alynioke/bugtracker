@@ -1,0 +1,4 @@
+arcana_bugtracker:
+    resource: "@ArcanaBugtrackerBundle/Resources/config/routing.yml"
+    prefix:   /
+

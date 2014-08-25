@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+	{% block body %}
+
+<input type="color" name="color">
+
+
+		<a href="{{ url('bugs_add') }}">Add new bug</a>
+		<table>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Project</th>
+					<th>Status</th>
+					<th>Priority</th>
+				</tr>
+			</thead>
+			<tbody>
+	            {% for bug in bugs %}
+	                <tr>
+	                	<td>
+	                		{{ bug.title }}
+	                	</td>
+	                	<td>
+	                		{{ bug.project }}
+	                	</td>
+	                	<td>
+	                		{{ bug.status }}
+	                	</td>
+	                	<td>
+	                		{{ bug.priority }}
+	                	</td>
+	                </tr>
+	            {% endfor %}
+			</tbody>
+		</table>
+	{% endblock %}

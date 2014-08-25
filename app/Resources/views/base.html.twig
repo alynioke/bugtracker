@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+            {% stylesheets '@ArcanaBugtrackerBundle/Resources/public/css/*' %} 
+                <link rel="stylesheet" type="text/css" charset="UTF-8" media="all" href="{{ asset_url }}"/> 
+            {% endstylesheets %} 
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+        {% if app.user %}
+            <ul class="nav">
+                <li class="navItem"><a class="navLink active" href="{{ url('bugs_list') }}">Bugs</a></li>
+                <li class="navItem"><a class="navLink" href="{{ url('projects_list') }}">Projects</a></li>
+                <li class="navItem"><a class="navLink" href="{{ url('users_list') }}">Users</a></li>
+                <li class="navItem"><a class="navLink" href="{{ url('statuses_list') }}">Statuses</a></li>
+                <li class="navItem"><a class="navLink" href="{{ url('logout') }}">Logout</a></li>
+            </ul>
+        {% endif %}
+        <div class="main">
+        {% block body %}{% endblock %}
+        </div>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

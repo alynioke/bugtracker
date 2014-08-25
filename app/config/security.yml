@@ -1,0 +1,26 @@
+security:
+    providers:
+        administrators:
+            entity: { class: ArcanaBugtrackerBundle:User, property: username }
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_ADMIN }
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        secured_area:
+            pattern:   ^/
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login_check
+                # form_login: ~
+            logout: ~
+
+    encoders:
+        Arcana\BugtrackerBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12

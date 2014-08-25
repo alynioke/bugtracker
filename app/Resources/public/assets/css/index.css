@@ -1,0 +1,25 @@
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+    padding:0px;
+}
+
+.navItem {
+    float:left;
+}
+.navLink {
+    padding:2px 8px 3px 8px;
+    color: #468fc5;
+    font-size: 16px;
+    text-transform: capitalize;
+}
+.active {
+    background-color: #d5d5d5;
+    color: #5a5a59;
+}
