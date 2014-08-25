@@ -78,6 +78,16 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * Get username
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->username;
+    }
+
+    /**
      * Set password
      *
      * @param string $password
@@ -112,6 +122,16 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * Get role
+     *
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->roles->first();
+    }
+
+    /**
      * Set roles
      *
      * @param string $roles
@@ -119,6 +139,7 @@ class User implements UserInterface, \Serializable
      */
     public function setRole($role)
     {
+        $this->roles->clear();
         $this->roles->add($role);
 
         return $this;

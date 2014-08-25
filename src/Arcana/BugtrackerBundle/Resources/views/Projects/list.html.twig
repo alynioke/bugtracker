@@ -7,5 +7,5 @@
 {% endblock %}
 
 {% block item_title %}
-	<a href="{{ url('projects_edit', {'project': item.id}) }}">{{ item.title}}</a>
+	<a href="{{ url('projects_edit', {'id': item.id}) }}">{{ item.title}}</a>
 {% endblock %}

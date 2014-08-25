@@ -2,50 +2,51 @@
 namespace Arcana\BugtrackerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Arcana\BugtrackerBundle\Entity\User;
-use Arcana\BugtrackerBundle\Entity\Role;
+use Arcana\BugtrackerBundle\Form\Type\UserType;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 
 class UsersController extends Controller
 {
 
-
     public function listAction()
     {
-        $arr = array( "items" => array(
-        	0 => array("id"=>1, "title" => "test1", "project" => "pr1", "status" => "opened", "priority" => 4),
-        	1 => array("id"=>2, "title" => "test2", "project" => "pr2", "status" => "opened", "priority" => 8),
-        	2 => array("id"=>3, "title" => "test3", "project" => "pr3", "status" => "closed", "priority" => 2))
-        	);
-		$response = $this->render('ArcanaBugtrackerBundle:Users:list.html.twig', $arr);
-		return $response;
+        $users = $this->getDoctrine()
+        ->getRepository('ArcanaBugtrackerBundle:User')
+        ->findAll();
+        $params = array( "items" => $users);
+        $response = $this->render('ArcanaBugtrackerBundle:Users:list.html.twig', $params);
+        return $response;
     }
 
-    public function addAction()
+    public function addAction(Request $request)
     {
-        $arr = array( "items" => array(
-        	0 => array("id"=>1, "title" => "test1", "project" => "pr1", "status" => "opened", "priority" => 4),
-        	1 => array("id"=>2, "title" => "test2", "project" => "pr2", "status" => "opened", "priority" => 8),
-        	2 => array("id"=>3, "title" => "test3", "project" => "pr3", "status" => "closed", "priority" => 2))
-        	);
-		$response = $this->render('ArcanaBugtrackerBundle:Users:list.html.twig', $arr);
-		return $response;
+        $user = new User();
+
+        $form = $this->createForm(new UserType(), $user);
+
+        $form->handleRequest($request);
+        if($form->isValid()) {
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($user);
+            $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+            $user->setPassword($password);
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            return $this->redirect($this->generateUrl('users_list'));
+        }
+
+        $params = array('form' => $form->createView());
+        $response = $this->render('ArcanaBugtrackerBundle:Users:add.html.twig', $params);
+        return $response;
     }
 
-    public function editAction()
+    public function editAction($id)
     {
-        $arr = array( "items" => array(
-        	0 => array("id"=>1, "title" => "test1", "project" => "pr1", "status" => "opened", "priority" => 4),
-        	1 => array("id"=>2, "title" => "test2", "project" => "pr2", "status" => "opened", "priority" => 8),
-        	2 => array("id"=>3, "title" => "test3", "project" => "pr3", "status" => "closed", "priority" => 2))
-        	);
-		$response = $this->render('ArcanaBugtrackerBundle:Users:list.html.twig', $arr);
-		return $response;
+
     }
-
-
 }

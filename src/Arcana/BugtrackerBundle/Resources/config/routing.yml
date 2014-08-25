@@ -28,7 +28,7 @@ projects_add:
     path:     /projects/add
     defaults: { _controller: ArcanaBugtrackerBundle:Projects:add }
 projects_edit:
-    path:     /projects/{project}
+    path:     /projects/{id}
     defaults: { _controller: ArcanaBugtrackerBundle:Projects:edit }
 
 users_list:
@@ -38,8 +38,8 @@ users_add:
     path:     /users/add
     defaults: { _controller: ArcanaBugtrackerBundle:Users:add }
 users_edit:
-    path:     /users/{user}
-    defaults: { _controller: ArcanaBugtrackerBundle:Users:edit }
+    path:     /users/{id}
+    defaults: { _controller: ArcanaBugtrackerBundle:Statuses:edit }
 
 statuses_list:
     path:     /statuses/
@@ -48,7 +48,7 @@ statuses_add:
     path:     /statuses/add
     defaults: { _controller: ArcanaBugtrackerBundle:Statuses:add }
 statuses_edit:
-    path:     /statuses/{status}
+    path:     /statuses/{id}
     defaults: { _controller: ArcanaBugtrackerBundle:Statuses:edit }
 
 

@@ -88,10 +88,10 @@ class SecurityController extends Controller
         // $password = $encoder->encodePassword('admin', $user->getSalt());
         // $user->setPassword($password);
 
-        //       $em = $this->getDoctrine()->getManager();
-        //       $em->persist($role);
-        //       $em->persist($user);
-        //       $em->flush();
+              // $em = $this->getDoctrine()->getManager();
+              // $em->persist($role);
+              // $em->persist($user);
+              // $em->flush();
 
 
     }

@@ -1,4 +1,6 @@
-{% extends 'ArcanaBugtrackerBundle::add.html.twig' %}
+{% extends '::base.html.twig' %}
 
-{% block heading %}<h1>ADD PROJECT</h1>{% endblock %}
-
+{% block heading %}ADD PROJECT{% endblock %}
+{% block body %}
+	{{ form(form) }}
+{% endblock %}

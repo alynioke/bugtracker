@@ -14,6 +14,9 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
+        form:
+            resources:
+                - 'ArcanaBugtrackerBundle:Form' #set color
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
@@ -28,6 +31,10 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - 'ArcanaBugtrackerBundle:Form:fields.html.twig'
+            - 'ArcanaBugtrackerBundle:Form:choice_fields.html.twig'
 
 # Assetic Configuration
 assetic:

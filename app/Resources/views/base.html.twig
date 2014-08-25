@@ -19,10 +19,11 @@
                 <li class="navItem"><a class="navLink" href="{{ url('users_list') }}">Users</a></li>
                 <li class="navItem"><a class="navLink" href="{{ url('statuses_list') }}">Statuses</a></li>
                 <li class="navItem"><a class="navLink" href="{{ url('logout') }}">Logout</a></li>
+                <li class="navItem">Hello {{ app.user.username }} ({{ app.user.role.name }}) !</li>
             </ul>
         {% endif %}
         <div class="main">
-        {% block heading %}{% endblock %}
+        <h1>{% block heading %}{% endblock %}</h1>
         {% block body %}{% endblock %}
         </div>
         {% block javascripts %}{% endblock %}
