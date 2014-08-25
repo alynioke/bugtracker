@@ -24,14 +24,32 @@ bugs_add:
 projects_list:
     path:     /projects/
     defaults: { _controller: ArcanaBugtrackerBundle:Projects:list }
+projects_add:
+    path:     /projects/add
+    defaults: { _controller: ArcanaBugtrackerBundle:Projects:add }
+projects_edit:
+    path:     /projects/{project}
+    defaults: { _controller: ArcanaBugtrackerBundle:Projects:edit }
 
 users_list:
     path:     /users/
     defaults: { _controller: ArcanaBugtrackerBundle:Users:list }
+users_add:
+    path:     /users/add
+    defaults: { _controller: ArcanaBugtrackerBundle:Users:add }
+users_edit:
+    path:     /users/{user}
+    defaults: { _controller: ArcanaBugtrackerBundle:Users:edit }
 
 statuses_list:
     path:     /statuses/
     defaults: { _controller: ArcanaBugtrackerBundle:Statuses:list }
+statuses_add:
+    path:     /statuses/add
+    defaults: { _controller: ArcanaBugtrackerBundle:Statuses:add }
+statuses_edit:
+    path:     /statuses/{status}
+    defaults: { _controller: ArcanaBugtrackerBundle:Statuses:edit }
 
 
 

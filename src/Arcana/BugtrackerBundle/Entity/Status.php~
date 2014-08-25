@@ -35,6 +35,10 @@ class Status
      */
     private $color;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Bug", mappedBy="status")
+     */
+    protected $bugs;
 
     /**
      * Get id
@@ -90,5 +94,45 @@ class Status
     public function getColor()
     {
         return $this->color;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->bugs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add bugs
+     *
+     * @param \Arcana\BugtrackerBundle\Entity\Bug $bugs
+     * @return Status
+     */
+    public function addBug(\Arcana\BugtrackerBundle\Entity\Bug $bugs)
+    {
+        $this->bugs[] = $bugs;
+
+        return $this;
+    }
+
+    /**
+     * Remove bugs
+     *
+     * @param \Arcana\BugtrackerBundle\Entity\Bug $bugs
+     */
+    public function removeBug(\Arcana\BugtrackerBundle\Entity\Bug $bugs)
+    {
+        $this->bugs->removeElement($bugs);
+    }
+
+    /**
+     * Get bugs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBugs()
+    {
+        return $this->bugs;
     }
 }

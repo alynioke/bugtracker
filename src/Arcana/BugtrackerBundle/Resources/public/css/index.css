@@ -23,3 +23,7 @@ ul {
     background-color: #d5d5d5;
     color: #5a5a59;
 }
+
+.main {
+    clear:both;
+}

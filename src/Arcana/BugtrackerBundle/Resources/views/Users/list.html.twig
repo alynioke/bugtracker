@@ -1,0 +1,11 @@
+{% extends 'ArcanaBugtrackerBundle::list.html.twig' %}
+
+{% block heading %}<h1>USERS</h1>{% endblock %}
+
+{% block add_new %}
+	<a href="{{ url('users_add') }}">Add new user</a>
+{% endblock %}
+
+{% block item_title %}
+	<a href="{{ url('users_edit', {'user': item.id}) }}">{{ item.title}}</a>
+{% endblock %}

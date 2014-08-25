@@ -28,6 +28,10 @@ class Project
      */
     private $title;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Bug", mappedBy="project")
+     */
+    protected $bugs;
 
     /**
      * Get id

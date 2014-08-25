@@ -1,0 +1,11 @@
+{% extends 'ArcanaBugtrackerBundle::list.html.twig' %}
+
+{% block heading %}<h1>STATUSES</h1>{% endblock %}
+
+{% block add_new %}
+	<a href="{{ url('statuses_add') }}">Add new status</a>
+{% endblock %}
+
+{% block item_title %}
+	<a href="{{ url('statuses_edit', {'status': item.id}) }}">{{ item.title}}</a>
+{% endblock %}

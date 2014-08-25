@@ -28,6 +28,10 @@ class Project
      */
     private $title;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Bug", mappedBy="project")
+     */
+    protected $bugs;
 
     /**
      * Get id
@@ -60,5 +64,45 @@ class Project
     public function getTitle()
     {
         return $this->title;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->bugs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add bugs
+     *
+     * @param \Arcana\BugtrackerBundle\Entity\Bug $bugs
+     * @return Project
+     */
+    public function addBug(\Arcana\BugtrackerBundle\Entity\Bug $bugs)
+    {
+        $this->bugs[] = $bugs;
+
+        return $this;
+    }
+
+    /**
+     * Remove bugs
+     *
+     * @param \Arcana\BugtrackerBundle\Entity\Bug $bugs
+     */
+    public function removeBug(\Arcana\BugtrackerBundle\Entity\Bug $bugs)
+    {
+        $this->bugs->removeElement($bugs);
+    }
+
+    /**
+     * Get bugs
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBugs()
+    {
+        return $this->bugs;
     }
 }
