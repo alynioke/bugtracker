@@ -3,8 +3,7 @@ namespace Arcana\BugtrackerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Arcana\BugtrackerBundle\Entity\Bug;
-use Arcana\BugtrackerBundle\Form\Type\BugType;
+use Symfony\Component\Form\FormError;
 
 
 class BaseController extends Controller
@@ -19,31 +18,40 @@ class BaseController extends Controller
         return $response;
     }
     
-    public function baseAddAction($id = false, Request $request, $type)
+    public function baseAddAction($entity, $id = false, Request $request, $type)
     {
         if ($type == "add") {
-            $bug = new Bug();
+            $objectType = "Arcana\\BugtrackerBundle\\Entity\\".$entity;
+            $object = new $objectType();
         } elseif ($type == "edit") {     
-            $bug = $this->getDoctrine()
-            ->getRepository('ArcanaBugtrackerBundle:Bug')
+            $object = $this->getDoctrine()
+            ->getRepository('ArcanaBugtrackerBundle:'.$entity)
             ->findOneById($id);
         }
         
-        if ($bug) {
-            $form = $this->createForm(new BugType(), $bug);
+        if ($object) {
+            $formType = "Arcana\\BugtrackerBundle\\Form\\Type\\".$entity."Type";
+            $form = $this->createForm(new $formType(), $object);
             $form->handleRequest($request);
             if($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($bug);
-                $em->flush();
-                return $this->redirect($this->generateUrl('bugs_list'));
+                try {
+                    $em->persist($object);
+                    $em->flush();
+                } catch (\Doctrine\DBAL\DBALException $e) {
+                    $form->get('title')->addError(new FormError('There is '.strtolower($entity).' with such title already! Choose different one.'));
+
+                    $params = array('form' => $form->createView());
+                    return $response = $this->render('ArcanaBugtrackerBundle:Users:add.html.twig', $params);
+                }
+                return $this->redirect($this->generateUrl(strtolower($entity).'s_list'));
             }
 
             $params = array('form' => $form->createView());
-            $response = $this->render('ArcanaBugtrackerBundle:Bugs:add.html.twig', $params);
+            $response = $this->render('ArcanaBugtrackerBundle:'.$entity.'s:add.html.twig', $params);
         } else {
-            $params = array('type' => "Bug");
-            $response = $this->render('ArcanaBugtrackerBundle:Errors:noSuchValue.html.twig', $params);
+            $params = array('message' => $entity." with such id doesn't exist");
+            $response = $this->render('ArcanaBugtrackerBundle:Errors:error.html.twig', $params);
         }
         return $response;
     }

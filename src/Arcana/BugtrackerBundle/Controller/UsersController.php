@@ -5,20 +5,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Arcana\BugtrackerBundle\Entity\User;
 use Arcana\BugtrackerBundle\Form\Type\UserType;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Security\Core\SecurityContextInterface;
+use Arcana\BugtrackerBundle\Controller\BaseController;
 
 
-class UsersController extends Controller
+class UsersController extends BaseController
 {
 
     public function listAction()
     {
-        $users = $this->getDoctrine()
-        ->getRepository('ArcanaBugtrackerBundle:User')
-        ->findAll();
-        $params = array( "items" => $users);
-        $response = $this->render('ArcanaBugtrackerBundle:Users:list.html.twig', $params);
-        return $response;
+        return $this->baseListAction("User");
     }
 
     public function addAction($id = false, Request $request, $type)
@@ -29,8 +26,6 @@ class UsersController extends Controller
             $user = $this->getDoctrine()
             ->getRepository('ArcanaBugtrackerBundle:User')
             ->findOneById($id);
-            $oldUser = $user;
-            $user->setPassword("");
         }
 
         if ($user) {
@@ -43,16 +38,23 @@ class UsersController extends Controller
                 $user->setPassword($password);
                 
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($user);
-                $em->flush();
+                try {
+                    $em->persist($user);
+                    $em->flush();
+                } catch (\Doctrine\DBAL\DBALException $e) {
+                    $form->get('username')->addError(new FormError('There is user with such username already! Choose different one.'));
+
+                    $params = array('form' => $form->createView());
+                    return $response = $this->render('ArcanaBugtrackerBundle:Users:add.html.twig', $params);
+                }
                 return $this->redirect($this->generateUrl('users_list'));
             }
 
             $params = array('form' => $form->createView());
             $response = $this->render('ArcanaBugtrackerBundle:Users:add.html.twig', $params);
         } else {
-            $params = array('type' => "User");
-            $response = $this->render('ArcanaBugtrackerBundle:Errors:noSuchValue.html.twig', $params);
+            $params = array('message' => "User with such id doesn't exist");
+            $response = $this->render('ArcanaBugtrackerBundle:Errors:error.html.twig', $params);
         }
         return $response;
     }

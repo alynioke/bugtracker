@@ -3,52 +3,17 @@ namespace Arcana\BugtrackerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Arcana\BugtrackerBundle\Entity\Project;
+use Arcana\BugtrackerBundle\Controller\BaseController;
 
-
-class ProjectsController extends Controller
+class ProjectsController extends BaseController
 {
-
     public function listAction()
     {
-        $projects = $this->getDoctrine()
-        ->getRepository('ArcanaBugtrackerBundle:Project')
-        ->findAll();
-        $params = array( "items" => $projects);
-		$response = $this->render('ArcanaBugtrackerBundle:Projects:list.html.twig', $params);
-		return $response;
+        return $this->baseListAction("Project");
     }
-
+    
     public function addAction($id = false, Request $request, $type)
     {
-        if ($type == "add") {
-            $project = new Project();
-        } elseif ($type == "edit") {     
-            $project = $this->getDoctrine()
-            ->getRepository('ArcanaBugtrackerBundle:Project')
-            ->findOneById($id);
-        }
-
-        if ($project) {
-            $form = $this->createFormBuilder($project)
-                ->add("title", "text")
-                ->add('save', 'submit', array('label' => 'Save'))
-                ->getForm();
-
-            $form->handleRequest($request);
-            if($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($project);
-                $em->flush();
-                return $this->redirect($this->generateUrl('projects_list'));
-            }
-
-            $params = array('form' => $form->createView());
-    		$response = $this->render('ArcanaBugtrackerBundle:Projects:add.html.twig', $params);
-        } else {
-            $params = array('type' => "Project");
-            $response = $this->render('ArcanaBugtrackerBundle:Errors:noSuchValue.html.twig', $params);
-        }
-		return $response;
+        return $this->baseAddAction("Project", $id, $request, $type);
     }
 }

@@ -5,12 +5,12 @@ namespace Arcana\BugtrackerBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Status
+ * State
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Arcana\BugtrackerBundle\Entity\StatusRepository")
+ * @ORM\Entity(repositoryClass="Arcana\BugtrackerBundle\Entity\StateRepository")
  */
-class Status
+class State
 {
     /**
      * @var integer
@@ -24,19 +24,19 @@ class Status
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, unique=true)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="color", type="string", length=6)
+     * @ORM\Column(name="color", type="string", length=7)
      */
     private $color;
 
     /**
-     * @ORM\OneToMany(targetEntity="Bug", mappedBy="status")
+     * @ORM\OneToMany(targetEntity="Bug", mappedBy="state")
      */
     protected $bugs;
 
@@ -54,7 +54,7 @@ class Status
      * Set title
      *
      * @param string $title
-     * @return Status
+     * @return State
      */
     public function setTitle($title)
     {
@@ -77,7 +77,7 @@ class Status
      * Set color
      *
      * @param string $color
-     * @return Status
+     * @return State
      */
     public function setColor($color)
     {
@@ -107,7 +107,7 @@ class Status
      * Add bugs
      *
      * @param \Arcana\BugtrackerBundle\Entity\Bug $bugs
-     * @return Status
+     * @return State
      */
     public function addBug(\Arcana\BugtrackerBundle\Entity\Bug $bugs)
     {

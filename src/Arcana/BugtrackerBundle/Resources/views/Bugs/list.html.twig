@@ -8,7 +8,7 @@
 				<tr>
 					<th>Title</th>
 					<th>Project</th>
-					<th class="centered">Status</th>
+					<th class="centered">State</th>
 					<th class="centered">Priority</th>
 				</tr>
 			</thead>
@@ -26,7 +26,7 @@
 	                		{{ bug.project.title }}
 	                	</td>
 	                	<td>
-	                		<span class="bugStatus centered" style="background-color:{{bug.status.color}}">{{ bug.status.title }}</span>
+	                		<span class="bugState centered" style="background-color:{{bug.state.color}}">{{ bug.state.title }}</span>
 	                	</td>
 	                	<td class="centered">
 	                		{{ bug.priority }}

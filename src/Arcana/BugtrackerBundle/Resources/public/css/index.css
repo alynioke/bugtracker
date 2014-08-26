@@ -73,7 +73,7 @@ tbody>tr:hover {
     font-weight: red;
 }
 
-.bugStatus {
+.bugState {
     padding:3px;
     width:100%;
     float:left;

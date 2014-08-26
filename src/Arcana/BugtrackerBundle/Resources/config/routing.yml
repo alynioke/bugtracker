@@ -50,15 +50,15 @@ users_edit:
     requirements: 
         id: \d+
 
-statuses_list:
-    path:     /statuses/
-    defaults: { _controller: ArcanaBugtrackerBundle:Statuses:list }
-statuses_add:
-    path:     /statuses/add
-    defaults: { _controller: ArcanaBugtrackerBundle:Statuses:add, type: add }
-statuses_edit:
-    path:     /statuses/{id}
-    defaults: { _controller: ArcanaBugtrackerBundle:Statuses:add, type: edit }
+states_list:
+    path:     /states/
+    defaults: { _controller: ArcanaBugtrackerBundle:States:list }
+states_add:
+    path:     /states/add
+    defaults: { _controller: ArcanaBugtrackerBundle:States:add, type: add }
+states_edit:
+    path:     /states/{id}
+    defaults: { _controller: ArcanaBugtrackerBundle:States:add, type: edit }
     requirements: 
         id: \d+
 

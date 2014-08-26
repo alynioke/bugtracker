@@ -23,11 +23,11 @@ class BugType extends AbstractType
                         }
                     )
                 )
-            ->add('status', 'entity',
+            ->add('state', 'entity',
                     array(
-                        'class'=>'Arcana\BugtrackerBundle\Entity\Status',
+                        'class'=>'Arcana\BugtrackerBundle\Entity\State',
                         'property'=>'title',
-                        'query_builder' => function (\Arcana\BugtrackerBundle\Entity\StatusRepository $repository)
+                        'query_builder' => function (\Arcana\BugtrackerBundle\Entity\StateRepository $repository)
                         {
                          return $repository
                          ->createQueryBuilder('s')

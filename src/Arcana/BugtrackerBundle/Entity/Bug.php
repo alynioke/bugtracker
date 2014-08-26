@@ -29,10 +29,10 @@ class Bug
     private $title;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Status", inversedBy="bugs")
-     * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="bugs")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="id", nullable=false, unique=true)
      */
-    private $status;
+    private $state;
 
     /**
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="bugs")
@@ -54,7 +54,7 @@ class Bug
      */
     public function getColor()
     {
-        return $this->getStatus()->getColor();
+        return $this->getState()->getColor();
     }
     /**
      * Get id
@@ -90,26 +90,26 @@ class Bug
     }
 
     /**
-     * Set status
+     * Set state
      *
-     * @param string $status
+     * @param string $state
      * @return Bug
      */
-    public function setStatus($status)
+    public function setState($state)
     {
-        $this->status = $status;
+        $this->state = $state;
 
         return $this;
     }
 
     /**
-     * Get status
+     * Get state
      *
      * @return string 
      */
-    public function getStatus()
+    public function getState()
     {
-        return $this->status;
+        return $this->state;
     }
 
     /**

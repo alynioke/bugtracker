@@ -17,7 +17,7 @@
                 {% if app.user and is_granted('ROLE_ADMIN') %}
                     <li class="navItem"><a class="navLink" href="{{ url('projects_list') }}">Projects</a></li>
                     <li class="navItem"><a class="navLink" href="{{ url('users_list') }}">Users</a></li>
-                    <li class="navItem"><a class="navLink" href="{{ url('statuses_list') }}">Statuses</a></li>
+                    <li class="navItem"><a class="navLink" href="{{ url('states_list') }}">States</a></li>
                 {% endif %}
                 <li class="navItem"><a class="navLink" href="{{ url('logout') }}">Logout</a></li>
                 <li class="navItem"><a class="navLink hello" href="#">Hello {{ app.user.username }} ({{ app.user.role.name }}) !</a></li>

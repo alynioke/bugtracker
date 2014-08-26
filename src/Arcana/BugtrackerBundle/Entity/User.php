@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class User implements UserInterface, \Serializable
 {
+
     /**
      * @var integer
      *

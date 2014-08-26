@@ -4,7 +4,7 @@ security:
             entity: { class: ArcanaBugtrackerBundle:User, property: username }
 
     access_control:
-        - { path: ^/statuses/*, roles: ROLE_ADMIN }
+        - { path: ^/states/*, roles: ROLE_ADMIN }
         - { path: ^/users/*, roles: ROLE_ADMIN }
         - { path: ^/projects/*, roles: ROLE_ADMIN }
         - { path: ^/bugs/add, roles: ROLE_TESTER }
