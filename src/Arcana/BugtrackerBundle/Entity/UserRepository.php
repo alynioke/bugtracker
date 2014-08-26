@@ -12,10 +12,5 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
-	public function findAll()
-    {
-        return $this->getEntityManager()
-            ->createQuery('SELECT u, u.username AS title, u.id AS id FROM ArcanaBugtrackerBundle:User u')
-            ->getResult();
-    }
+
 }

@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block heading %}ADD BUG{% endblock %}
+{% block heading %}{{ type }} {{ entity }}{% endblock %}
 {% block body %}
 	{{ form(form) }}
 {% endblock %}

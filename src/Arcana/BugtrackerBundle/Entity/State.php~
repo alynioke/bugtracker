@@ -24,14 +24,14 @@ class State
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, unique=true)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="color", type="string", length=6)
+     * @ORM\Column(name="color", type="string", length=7)
      */
     private $color;
 
@@ -39,6 +39,8 @@ class State
      * @ORM\OneToMany(targetEntity="Bug", mappedBy="state")
      */
     protected $bugs;
+
+    private $url;
 
     /**
      * Get id

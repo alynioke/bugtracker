@@ -24,19 +24,19 @@ class Bug
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, unique=true)
      */
     private $title;
 
     /**
      * @ORM\ManyToOne(targetEntity="State", inversedBy="bugs")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="id", nullable=false)
      */
     private $state;
 
     /**
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="bugs")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=false)
      */
     private $project;
 
@@ -47,6 +47,15 @@ class Bug
      */
     private $priority;
 
+    /**
+     * Get color
+     *
+     * @return string 
+     */
+    public function getColor()
+    {
+        return $this->getState()->getColor();
+    }
     /**
      * Get id
      *

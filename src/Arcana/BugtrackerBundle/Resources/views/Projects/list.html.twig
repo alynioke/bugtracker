@@ -1,11 +1,1 @@
 {% extends 'ArcanaBugtrackerBundle::list.html.twig' %}
-
-{% block heading %}PROJECTS{% endblock %}
-
-{% block add_new %}
-	<a class="add" href="{{ url('projects_add') }}">Add new project</a>
-{% endblock %}
-
-{% block item_title %}
-	<a href="{{ url('projects_edit', {'id': item.id}) }}">{{ item.title}}</a>
-{% endblock %}

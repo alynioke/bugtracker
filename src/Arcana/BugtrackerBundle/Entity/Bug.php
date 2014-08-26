@@ -24,13 +24,13 @@ class Bug
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, unique=true)
      */
     private $title;
 
     /**
      * @ORM\ManyToOne(targetEntity="State", inversedBy="bugs")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="id", nullable=false, unique=true)
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="id", nullable=false)
      */
     private $state;
 
@@ -47,6 +47,32 @@ class Bug
      */
     private $priority;
 
+
+    private $url;
+    
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return State
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+    
     /**
      * Get color
      *

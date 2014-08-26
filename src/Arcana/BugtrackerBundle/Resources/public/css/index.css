@@ -6,6 +6,9 @@ a:hover {
     text-decoration: underline;
     color: black;
 }
+h1 {
+    text-transform: uppercase;
+}
 form {
     width:300px;
 }
@@ -80,4 +83,8 @@ tbody>tr:hover {
 }
 .centered {
     text-align: center;
+}
+
+.add {
+    text-transform: capitalize;
 }

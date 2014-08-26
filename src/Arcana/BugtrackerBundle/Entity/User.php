@@ -15,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class User implements UserInterface, \Serializable
 {
-
     /**
      * @var integer
      *
@@ -45,6 +44,30 @@ class User implements UserInterface, \Serializable
      */
     private $roles;
 
+    private $url;
+    
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return State
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
 
     /**
      * Get id

@@ -5,7 +5,7 @@ namespace Arcana\BugtrackerBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * State
+ * Arcana\BugtrackerBundle\Entity\State
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Arcana\BugtrackerBundle\Entity\StateRepository")
@@ -39,6 +39,31 @@ class State
      * @ORM\OneToMany(targetEntity="Bug", mappedBy="state")
      */
     protected $bugs;
+
+    private $url;
+    
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return State
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
 
     /**
      * Get id

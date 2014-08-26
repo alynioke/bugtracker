@@ -9,37 +9,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Arcana\BugtrackerBundle\Entity\User;
 use Arcana\BugtrackerBundle\Entity\Role;
 
-
 class SecurityController extends Controller
 {
-
-    /**
-     * @Template()
-     */
-
-    public function generateAction($limit)
-    {
-
-        // $factory = $this->get('security.encoder_factory');
-        // $encoder = $factory->getEncoder($user);
-        // $password = $encoder->encodePassword('password', $user->getSalt());
-        // $user->setPassword($password);
-
-
-        // $test = null;
-        // if ($encoder->isPasswordValid($user2->getPassword(), 'admi', $user2->getSalt()) ) {
-        // 	$test = "true";
-        // } else {
-        // 	$test = "false";
-        // }
-        // $roleName = $user->getRoles()->getRole();
-
-    }
-
     public function loginAction(Request $request)
     {
-
-
+        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirect($this->generateUrl('bugs_list'));
+        }
         $session = $request->getSession();
 
         // get the login error if there is one
