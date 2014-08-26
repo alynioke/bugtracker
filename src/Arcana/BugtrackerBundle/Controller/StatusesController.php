@@ -18,27 +18,33 @@ class StatusesController extends Controller
         return $response;
     }
 
-    public function addAction(Request $request)
+    public function addAction($id = false, Request $request, $type)
     {
-        $status = new Status();
-        
-        $form = $this->createForm(new StatusType(), $status);
-
-        $form->handleRequest($request);
-        if($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($status);
-            $em->flush();
-            return $this->redirect($this->generateUrl('statuses_list'));
+        if ($type == "add") {
+            $status = new Status();
+        } elseif ($type == "edit") {     
+            $status = $this->getDoctrine()
+            ->getRepository('ArcanaBugtrackerBundle:Status')
+            ->findOneById($id);
         }
 
-        $params = array('form' => $form->createView());
-        $response = $this->render('ArcanaBugtrackerBundle:Statuses:add.html.twig', $params);
-        return $response;
-    }
-    
-    public function editAction($id)
-    {
+        if ($status) {
+            $form = $this->createForm(new StatusType(), $status);
 
+            $form->handleRequest($request);
+            if($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($status);
+                $em->flush();
+                return $this->redirect($this->generateUrl('statuses_list'));
+            }
+
+            $params = array('form' => $form->createView());
+            $response = $this->render('ArcanaBugtrackerBundle:Statuses:add.html.twig', $params);
+        } else {
+            $params = array('type' => "Status");
+            $response = $this->render('ArcanaBugtrackerBundle:Errors:noSuchValue.html.twig', $params);
+        }
+        return $response;
     }
 }

@@ -19,30 +19,36 @@ class ProjectsController extends Controller
 		return $response;
     }
 
-    public function addAction(Request $request)
+    public function addAction($id = false, Request $request, $type)
     {
-        $project = new Project();
-
-        $form = $this->createFormBuilder($project)
-            ->add("title", "text")
-            ->add('save', 'submit', array('label' => 'Save'))
-            ->getForm();
-
-        $form->handleRequest($request);
-        if($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($project);
-            $em->flush();
-            return $this->redirect($this->generateUrl('projects_list'));
+        if ($type == "add") {
+            $project = new Project();
+        } elseif ($type == "edit") {     
+            $project = $this->getDoctrine()
+            ->getRepository('ArcanaBugtrackerBundle:Project')
+            ->findOneById($id);
         }
 
-        $params = array('form' => $form->createView());
-		$response = $this->render('ArcanaBugtrackerBundle:Projects:add.html.twig', $params);
-		return $response;
-    }
-    
-    public function editAction($id)
-    {
+        if ($project) {
+            $form = $this->createFormBuilder($project)
+                ->add("title", "text")
+                ->add('save', 'submit', array('label' => 'Save'))
+                ->getForm();
 
+            $form->handleRequest($request);
+            if($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($project);
+                $em->flush();
+                return $this->redirect($this->generateUrl('projects_list'));
+            }
+
+            $params = array('form' => $form->createView());
+    		$response = $this->render('ArcanaBugtrackerBundle:Projects:add.html.twig', $params);
+        } else {
+            $params = array('type' => "Project");
+            $response = $this->render('ArcanaBugtrackerBundle:Errors:noSuchValue.html.twig', $params);
+        }
+		return $response;
     }
 }

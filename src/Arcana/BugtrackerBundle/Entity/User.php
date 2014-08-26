@@ -5,6 +5,7 @@ namespace Arcana\BugtrackerBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Arcana\BugtrackerBundle\Entity\User
@@ -221,4 +222,16 @@ class User implements UserInterface, \Serializable
     {
         $this->roles->removeElement($roles);
     }
+    // /**
+    //  * Detect if user has unique username. Oriented only on user addition
+    //  *
+    //  * @return boolean
+    //  */
+    // public function isUnique() {
+    //     $user = $this->getDoctrine()
+    //     ->getRepository('ArcanaBugtrackerBundle:User')
+    //     ->findOneByName($this->getUsername());
+    //     if ($user) return false;
+    //     return true;
+    // }
 }

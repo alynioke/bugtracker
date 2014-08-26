@@ -21,32 +21,37 @@ class UsersController extends Controller
         return $response;
     }
 
-    public function addAction(Request $request)
+    public function addAction($id = false, Request $request, $type)
     {
-        $user = new User();
-
-        $form = $this->createForm(new UserType(), $user);
-
-        $form->handleRequest($request);
-        if($form->isValid()) {
-            $factory = $this->get('security.encoder_factory');
-            $encoder = $factory->getEncoder($user);
-            $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-            $user->setPassword($password);
-            
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-            return $this->redirect($this->generateUrl('users_list'));
+        if ($type == "add") {
+            $user = new User();
+        } elseif ($type == "edit") {     
+            $user = $this->getDoctrine()
+            ->getRepository('ArcanaBugtrackerBundle:User')
+            ->findOneById($id);
         }
 
-        $params = array('form' => $form->createView());
-        $response = $this->render('ArcanaBugtrackerBundle:Users:add.html.twig', $params);
+        if ($user) {
+            $form = $this->createForm(new UserType(), $user);
+            $form->handleRequest($request);
+            if($form->isValid()) {
+                $factory = $this->get('security.encoder_factory');
+                $encoder = $factory->getEncoder($user);
+                $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+                $user->setPassword($password);
+                
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+                return $this->redirect($this->generateUrl('users_list'));
+            }
+
+            $params = array('form' => $form->createView());
+            $response = $this->render('ArcanaBugtrackerBundle:Users:add.html.twig', $params);
+        } else {
+            $params = array('type' => "User");
+            $response = $this->render('ArcanaBugtrackerBundle:Errors:noSuchValue.html.twig', $params);
+        }
         return $response;
-    }
-
-    public function editAction($id)
-    {
-
     }
 }
