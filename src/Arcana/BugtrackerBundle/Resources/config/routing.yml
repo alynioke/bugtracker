@@ -20,6 +20,9 @@ bugs_list:
 bugs_add:
     path:     /bugs/add
     defaults: { _controller: ArcanaBugtrackerBundle:Bugs:add }
+bugs_edit:
+    path:     /bugs/{id}
+    defaults: { _controller: ArcanaBugtrackerBundle:Bugs:edit }
 
 projects_list:
     path:     /projects/

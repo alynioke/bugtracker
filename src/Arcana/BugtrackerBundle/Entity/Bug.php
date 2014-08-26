@@ -30,13 +30,13 @@ class Bug
 
     /**
      * @ORM\ManyToOne(targetEntity="Status", inversedBy="bugs")
-     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=false)
      */
     private $status;
 
     /**
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="bugs")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=false)
      */
     private $project;
 
@@ -47,6 +47,15 @@ class Bug
      */
     private $priority;
 
+    /**
+     * Get color
+     *
+     * @return string 
+     */
+    public function getColor()
+    {
+        return $this->getStatus()->getColor();
+    }
     /**
      * Get id
      *

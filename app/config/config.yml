@@ -34,7 +34,6 @@ twig:
     form:
         resources:
             - 'ArcanaBugtrackerBundle:Form:fields.html.twig'
-            - 'ArcanaBugtrackerBundle:Form:choice_fields.html.twig'
 
 # Assetic Configuration
 assetic:
