@@ -29,6 +29,8 @@ class UsersController extends Controller
             $user = $this->getDoctrine()
             ->getRepository('ArcanaBugtrackerBundle:User')
             ->findOneById($id);
+            $oldUser = $user;
+            $user->setPassword("");
         }
 
         if ($user) {

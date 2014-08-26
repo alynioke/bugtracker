@@ -10,7 +10,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username', 'text')
-            ->add('password', 'text')
+            ->add('password', 'password')
             ->add('role', 'entity',
                     array(
                         'class'=>'Arcana\BugtrackerBundle\Entity\Role',
