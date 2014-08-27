@@ -2,6 +2,10 @@
 
 2) Navigate to that folder and execute following commands with the console:
 
+    curl -sS https://getcomposer.org/installer | php
+    
+    php composer.phar install
+    
     php app/console server:run
     
     php app/console doctrine:database:create
