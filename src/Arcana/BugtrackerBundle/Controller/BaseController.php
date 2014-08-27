@@ -57,7 +57,7 @@ class BaseController extends Controller
                 } catch (\Doctrine\DBAL\DBALException $e) {
                     // item was not added, since duplicated title
                     $form->get('title')->addError(
-                        new FormError('Please, provide unique title and all other fields should not be empty!')
+                        new FormError('Please, provide unique title and fields should not be empty!')
                     );
 
                     $params = array(

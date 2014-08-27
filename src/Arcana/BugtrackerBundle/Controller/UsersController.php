@@ -12,7 +12,6 @@ use Arcana\BugtrackerBundle\Controller\BaseController;
 
 class UsersController extends BaseController
 {
-
     public function listAction()
     {
         return $this->baseListAction("User");
@@ -26,11 +25,14 @@ class UsersController extends BaseController
             $user = $this->getDoctrine()
                 ->getRepository('ArcanaBugtrackerBundle:User')
                 ->findOneById($id);
-            $oldPassword = $user->getPassword();
         }
 
         if ($user) {
-            $passwordRequired = $type == "add" ? true : false;
+            $passwordRequired = true;
+            if ($type == 'edit') {
+                $oldPassword = $user->getPassword();
+                $passwordRequired = false;
+            }
             $form = $this->createForm(new UserType(), $user, array('required' => $passwordRequired));
             $form->handleRequest($request);
             if ($form->isValid()) {
@@ -58,7 +60,7 @@ class UsersController extends BaseController
                     $params = array(
                         'form' => $form->createView(),
                         'type' => $type,
-                        'entity' => $entity
+                        'entity' => 'User'
                     );
                     $response = $this->render('ArcanaBugtrackerBundle::add.html.twig', $params);
                 }

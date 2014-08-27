@@ -35,8 +35,6 @@ class UserType extends AbstractType
                 )
             )
             ->add('save', 'submit', array('label' => 'Save'));
-        // $builder->get('password')->get('second')->setAttribute('label', 'Enter password again');
-
     }
 
     public function getName()
