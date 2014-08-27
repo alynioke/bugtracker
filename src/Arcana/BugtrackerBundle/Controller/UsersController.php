@@ -26,16 +26,22 @@ class UsersController extends BaseController
             $user = $this->getDoctrine()
             ->getRepository('ArcanaBugtrackerBundle:User')
             ->findOneById($id);
+            $oldPassword = $user->getPassword();
         }
 
         if ($user) {
-            $form = $this->createForm(new UserType(), $user);
+            $passwordRequired = $type=="add"?true:false;
+            $form = $this->createForm(new UserType(), $user, array('required' => $passwordRequired));
             $form->handleRequest($request);
             if($form->isValid()) {
-                $factory = $this->get('security.encoder_factory');
-                $encoder = $factory->getEncoder($user);
-                $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
-                $user->setPassword($password);
+                if ($user->getPassword()) {
+                    $factory = $this->get('security.encoder_factory');
+                    $encoder = $factory->getEncoder($user);
+                    $password = $encoder->encodePassword($user->getPassword(), $user->getSalt());
+                    $user->setPassword($password);
+                } else {
+                    $user->setPassword($oldPassword);
+                }
                 
                 $em = $this->getDoctrine()->getManager();
                 try {
