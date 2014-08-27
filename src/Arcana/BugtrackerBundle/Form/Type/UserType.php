@@ -10,7 +10,11 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username', 'text')
-            ->add('password', 'repeated', array('type' => 'password', 'invalid_message' => 'Passwords do not match', 'first_name' => 'password', 'second_name' => 'repeat_password'))
+            ->add('password', 'repeated', 
+                array('type' => 'password', 
+                    'invalid_message' => 'Passwords do not match', 
+                    'first_name' => 'password:_minimum_6_characters', 
+                    'second_name' => 'repeat_password'))
             ->add('role', 'entity',
                     array(
                         'class'=>'Arcana\BugtrackerBundle\Entity\Role',

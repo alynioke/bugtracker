@@ -48,26 +48,31 @@ class BaseController extends Controller
             if($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 try {
+                    // item added
                     $em->persist($object);
                     $em->flush();
+                    $response = $this->redirect($this->generateUrl(strtolower($entity).'s_list'));
                 } catch (\Doctrine\DBAL\DBALException $e) {
-                    $form->get('title')->addError(new FormError('There is '.strtolower($entity).' with such title already! Choose different one.'));
+                    // item was not added, since duplicated title
+                    $form->get('title')->addError(new FormError('Please, provide unique title and all other fields should not be empty!'));
 
                     $params = array(
                         'form' => $form->createView(),
                         'type' => $type,
                         'entity' => $entity);
-                    return $response = $this->render('ArcanaBugtrackerBundle::add.html.twig', $params);
+                    $response = $this->render('ArcanaBugtrackerBundle::add.html.twig', $params);
                 }
-                return $this->redirect($this->generateUrl(strtolower($entity).'s_list'));
+                return $response;
             }
 
+            // response if validation errors
             $params = array(
                 'form' => $form->createView(), 
                 'type' => $type,
                 'entity' => $entity);
             $response = $this->render('ArcanaBugtrackerBundle::add.html.twig', $params);
         } else {
+            // response if no such id
             $params = array('message' => $entity." with such id doesn't exist");
             $response = $this->render('ArcanaBugtrackerBundle:Errors:error.html.twig', $params);
         }

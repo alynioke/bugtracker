@@ -39,20 +39,31 @@ class UsersController extends BaseController
                 
                 $em = $this->getDoctrine()->getManager();
                 try {
+                    // item added
                     $em->persist($user);
                     $em->flush();
+                    $response = $this->redirect($this->generateUrl('users_list'));
                 } catch (\Doctrine\DBAL\DBALException $e) {
+                    // item was not added, since duplicated title
                     $form->get('username')->addError(new FormError('There is user with such username already! Choose different one.'));
 
-                    $params = array('form' => $form->createView());
-                    return $response = $this->render('ArcanaBugtrackerBundle:Users:add.html.twig', $params);
+                    $params = array(
+                        'form' => $form->createView(),
+                        'type' => $type,
+                        'entity' => $entity);
+                    $response = $this->render('ArcanaBugtrackerBundle::add.html.twig', $params);
                 }
-                return $this->redirect($this->generateUrl('users_list'));
+                return $response;
             }
 
-            $params = array('form' => $form->createView());
-            $response = $this->render('ArcanaBugtrackerBundle:Users:add.html.twig', $params);
+            // response if validation errors
+            $params = array(
+                'form' => $form->createView(), 
+                'type' => $type,
+                'entity' => 'User');
+            $response = $this->render('ArcanaBugtrackerBundle::add.html.twig', $params);
         } else {
+            // response if no such id
             $params = array('message' => "User with such id doesn't exist");
             $response = $this->render('ArcanaBugtrackerBundle:Errors:error.html.twig', $params);
         }
