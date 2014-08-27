@@ -41,7 +41,7 @@ class State
     protected $bugs;
 
     private $url;
-    
+
     /**
      * Set url
      *
@@ -58,7 +58,7 @@ class State
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -68,7 +68,7 @@ class State
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -91,7 +91,7 @@ class State
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -114,12 +114,13 @@ class State
     /**
      * Get color
      *
-     * @return string 
+     * @return string
      */
     public function getColor()
     {
         return $this->color;
     }
+
     /**
      * Constructor
      */
@@ -154,7 +155,7 @@ class State
     /**
      * Get bugs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBugs()
     {

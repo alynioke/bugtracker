@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}{% endblock %}</title>
-        {% block stylesheets %}
-            {% stylesheets '@ArcanaBugtrackerBundle/Resources/public/css/*' %} 
-                <link rel="stylesheet" type="text/css" charset="UTF-8" media="all" href="{{ asset_url }}"/> 
-            {% endstylesheets %} 
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% if app.user %}
-            <ul class="nav">
-                <li class="navItem"><a class="navLink" href="{{ url('bugs_list') }}">Bugs</a></li>
-                {% if app.user and is_granted('ROLE_ADMIN') %}
-                    <li class="navItem"><a class="navLink" href="{{ url('projects_list') }}">Projects</a></li>
-                    <li class="navItem"><a class="navLink" href="{{ url('users_list') }}">Users</a></li>
-                    <li class="navItem"><a class="navLink" href="{{ url('states_list') }}">States</a></li>
-                {% endif %}
-                <li class="navItem"><a class="navLink" href="{{ url('logout') }}">Logout</a></li>
-                <li class="navItem"><a class="navLink hello" href="#">Hello {{ app.user.username }} ({{ app.user.role.name }}) !</a></li>
-            </ul>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}{% endblock %}</title>
+    {% block stylesheets %}
+        {% stylesheets '@ArcanaBugtrackerBundle/Resources/public/css/*' %}
+        <link rel="stylesheet" type="text/css" charset="UTF-8" media="all" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
+{% if app.user %}
+    <ul class="nav">
+        <li class="navItem"><a class="navLink" href="{{ url('bugs_list') }}">Bugs</a></li>
+        {% if app.user and is_granted('ROLE_ADMIN') %}
+            <li class="navItem"><a class="navLink" href="{{ url('projects_list') }}">Projects</a></li>
+            <li class="navItem"><a class="navLink" href="{{ url('users_list') }}">Users</a></li>
+            <li class="navItem"><a class="navLink" href="{{ url('states_list') }}">States</a></li>
         {% endif %}
-        <div class="main">
-        <h1>{% block heading %}{% endblock %}</h1>
-        {% block body %}{% endblock %}
-        </div>
-        {% block scripts %}
-            {% javascripts '@ArcanaBugtrackerBundle/Resources/public/js/*' %} 
-                <script src="{{ asset_url }}"></script>
-            {% endjavascripts %} 
-        {% endblock %}
-    </body>
+        <li class="navItem"><a class="navLink" href="{{ url('logout') }}">Logout</a></li>
+        <li class="navItem"><a class="navLink hello" href="#">Hello {{ app.user.username }} ({{ app.user.role.name }})
+                !</a></li>
+    </ul>
+{% endif %}
+<div class="main">
+    <h1>{% block heading %}{% endblock %}</h1>
+    {% block body %}{% endblock %}
+</div>
+{% block scripts %}
+    {% javascripts '@ArcanaBugtrackerBundle/Resources/public/js/*' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+</body>
 </html>

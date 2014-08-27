@@ -11,7 +11,7 @@ class StatesController extends BaseController
     {
         return $this->baseListAction("State");
     }
-    
+
     public function addAction($id = false, Request $request, $type)
     {
         return $this->baseAddAction("State", $id, $request, $type);

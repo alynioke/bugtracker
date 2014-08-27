@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Arcana\BugtrackerBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;

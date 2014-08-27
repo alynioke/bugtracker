@@ -49,7 +49,7 @@ class Bug
 
 
     private $url;
-    
+
     /**
      * Set url
      *
@@ -66,26 +66,27 @@ class Bug
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
         return $this->url;
     }
-    
+
     /**
      * Get color
      *
-     * @return string 
+     * @return string
      */
     public function getColor()
     {
         return $this->getState()->getColor();
     }
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -108,7 +109,7 @@ class Bug
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -131,7 +132,7 @@ class Bug
     /**
      * Get state
      *
-     * @return string 
+     * @return string
      */
     public function getState()
     {
@@ -154,7 +155,7 @@ class Bug
     /**
      * Get priority
      *
-     * @return integer 
+     * @return integer
      */
     public function getPriority()
     {
@@ -177,7 +178,7 @@ class Bug
     /**
      * Get project
      *
-     * @return string 
+     * @return string
      */
     public function getProject()
     {

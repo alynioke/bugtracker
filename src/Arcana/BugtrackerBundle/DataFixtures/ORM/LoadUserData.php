@@ -17,10 +17,10 @@ class LoadUserData implements FixtureInterface
         $userAdmin = new User();
         $userAdmin->setUsername('admin2');
         $userAdmin->setPassword('admin');
-        
+
         $roleAdmin = $this->getDoctrine()
-        ->getRepository('ArcanaBugtrackerBundle:Role')
-        ->findOneByName("admin");
+            ->getRepository('ArcanaBugtrackerBundle:Role')
+            ->findOneByName("admin");
         $userAdmin->setRole($roleAdmin);
 
         $factory = $this->get('security.encoder_factory');

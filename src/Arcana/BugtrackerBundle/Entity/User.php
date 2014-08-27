@@ -45,7 +45,7 @@ class User implements UserInterface, \Serializable
     private $roles;
 
     private $url;
-    
+
     /**
      * Set url
      *
@@ -62,7 +62,7 @@ class User implements UserInterface, \Serializable
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {

@@ -11,7 +11,7 @@ class ProjectsController extends BaseController
     {
         return $this->baseListAction("Project");
     }
-    
+
     public function addAction($id = false, Request $request, $type)
     {
         return $this->baseAddAction("Project", $id, $request, $type);

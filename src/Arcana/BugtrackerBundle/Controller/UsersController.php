@@ -22,18 +22,18 @@ class UsersController extends BaseController
     {
         if ($type == "add") {
             $user = new User();
-        } elseif ($type == "edit") {     
+        } elseif ($type == "edit") {
             $user = $this->getDoctrine()
-            ->getRepository('ArcanaBugtrackerBundle:User')
-            ->findOneById($id);
+                ->getRepository('ArcanaBugtrackerBundle:User')
+                ->findOneById($id);
             $oldPassword = $user->getPassword();
         }
 
         if ($user) {
-            $passwordRequired = $type=="add"?true:false;
+            $passwordRequired = $type == "add" ? true : false;
             $form = $this->createForm(new UserType(), $user, array('required' => $passwordRequired));
             $form->handleRequest($request);
-            if($form->isValid()) {
+            if ($form->isValid()) {
                 if ($user->getPassword()) {
                     $factory = $this->get('security.encoder_factory');
                     $encoder = $factory->getEncoder($user);
@@ -42,7 +42,7 @@ class UsersController extends BaseController
                 } else {
                     $user->setPassword($oldPassword);
                 }
-                
+
                 $em = $this->getDoctrine()->getManager();
                 try {
                     // item added
@@ -51,12 +51,15 @@ class UsersController extends BaseController
                     $response = $this->redirect($this->generateUrl('users_list'));
                 } catch (\Doctrine\DBAL\DBALException $e) {
                     // item was not added, since duplicated title
-                    $form->get('username')->addError(new FormError('There is user with such username already! Choose different one.'));
+                    $form->get('username')->addError(
+                        new FormError('There is user with such username already! Choose different one.')
+                    );
 
                     $params = array(
                         'form' => $form->createView(),
                         'type' => $type,
-                        'entity' => $entity);
+                        'entity' => $entity
+                    );
                     $response = $this->render('ArcanaBugtrackerBundle::add.html.twig', $params);
                 }
                 return $response;
@@ -64,9 +67,10 @@ class UsersController extends BaseController
 
             // response if validation errors
             $params = array(
-                'form' => $form->createView(), 
+                'form' => $form->createView(),
                 'type' => $type,
-                'entity' => 'User');
+                'entity' => 'User'
+            );
             $response = $this->render('ArcanaBugtrackerBundle::add.html.twig', $params);
         } else {
             // response if no such id

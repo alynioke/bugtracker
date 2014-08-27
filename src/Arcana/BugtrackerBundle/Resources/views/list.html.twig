@@ -1,22 +1,22 @@
 {% extends '::base.html.twig' %}
 {#  #}
-	{% block heading %}{{type}}{% endblock %}
+	{% block heading %}{{ type }}{% endblock %}
 	{% block body %}
-		<a class="add" href="{{ addUrl }}">Add new {{type}}</a>
-		<table>
-			<thead>
-				<tr>
-					<th>Name</th>
-				</tr>
-			</thead>
-			<tbody>
-	            {% for item in items %}
-	                <tr>
-	                	<td>
-	                		<a href="{{ item.url }}">{{ item.title }}</a>
-	                	</td>
-	                </tr>
-	            {% endfor %}
-			</tbody>
-		</table>
-	{% endblock %}
+        <a class="add" href="{{ addUrl }}">Add new {{ type }}</a>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>
+                        <a href="{{ item.url }}">{{ item.title }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}

@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Arcana\BugtrackerBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -10,24 +10,30 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username', 'text')
-            ->add('password', 'repeated', 
-                array('type' => 'password', 
-                    'invalid_message' => 'Passwords do not match', 
-                    'first_name' => 'password:_minimum_6_characters', 
+            ->add(
+                'password',
+                'repeated',
+                array(
+                    'type' => 'password',
+                    'invalid_message' => 'Passwords do not match',
+                    'first_name' => 'password:_minimum_6_characters',
                     'second_name' => 'repeat_password',
-                    'required' => $options['required']))
-            ->add('role', 'entity',
-                    array(
-                        'class'=>'Arcana\BugtrackerBundle\Entity\Role',
-                        'property'=>'name',
-                        'query_builder' => function (\Arcana\BugtrackerBundle\Entity\RoleRepository $repository)
-                        {
-                         return $repository
-                         ->createQueryBuilder('r')
+                    'required' => $options['required']
+                )
+            )
+            ->add(
+                'role',
+                'entity',
+                array(
+                    'class' => 'Arcana\BugtrackerBundle\Entity\Role',
+                    'property' => 'name',
+                    'query_builder' => function (\Arcana\BugtrackerBundle\Entity\RoleRepository $repository) {
+                            return $repository
+                                ->createQueryBuilder('r')
                                 ->add('orderBy', 'r.name ASC');
                         }
-                    )
                 )
+            )
             ->add('save', 'submit', array('label' => 'Save'));
         // $builder->get('password')->get('second')->setAttribute('label', 'Enter password again');
 

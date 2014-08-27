@@ -8,12 +8,14 @@ class RoleType extends AbstractType
 {
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'choices' => array(
-                'ROLE_ADMIN' => 'admin uu',
-                'ROLE_TESTER' => 'tester uu',
+        $resolver->setDefaults(
+            array(
+                'choices' => array(
+                    'ROLE_ADMIN' => 'admin uu',
+                    'ROLE_TESTER' => 'tester uu',
+                )
             )
-        ));
+        );
     }
 
     public function getParent()

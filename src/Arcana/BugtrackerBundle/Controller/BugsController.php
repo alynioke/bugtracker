@@ -11,7 +11,7 @@ class BugsController extends BaseController
     {
         return $this->baseListAction("Bug");
     }
-    
+
     public function addAction($id = false, Request $request, $type)
     {
         return $this->baseAddAction("Bug", $id, $request, $type);

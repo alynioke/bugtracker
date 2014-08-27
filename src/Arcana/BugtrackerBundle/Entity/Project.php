@@ -35,7 +35,7 @@ class Project
 
 
     private $url;
-    
+
     /**
      * Set url
      *
@@ -52,17 +52,17 @@ class Project
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
         return $this->url;
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -85,12 +85,13 @@ class Project
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
         return $this->title;
     }
+
     /**
      * Constructor
      */
@@ -125,7 +126,7 @@ class Project
     /**
      * Get bugs
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBugs()
     {

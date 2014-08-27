@@ -1,38 +1,39 @@
 {% extends '::base.html.twig' %}
 	{% block body %}
-		{% if app.user and is_granted('ROLE_TESTER') %}
-			<a class="add" href="{{ url('bugs_add') }}">Add new bug</a>
-		{% endif %}
-		<table class="sortable">
-			<thead>
-				<tr>
-					<th>Title</th>
-					<th>Project</th>
-					<th class="centered">State</th>
-					<th class="centered">Priority</th>
-				</tr>
-			</thead>
-			<tbody>
-	            {% for bug in items %}
-	                <tr 
-	                {% if app.user and is_granted('ROLE_TESTER') or is_granted('ROLE_MANAGER') %}
-	                onclick="document.location = '{{ url('bugs_edit', {'id':bug.id}) }}';"
-	                {% endif %}
-	                >
-	                	<td>
-	                		{{ bug.title }}
-	                	</td>
-	                	<td>
-	                		{{ bug.project.title }}
-	                	</td>
-	                	<td>
-	                		<span class="bugState centered" style="background-color:{{bug.state.color}}">{{ bug.state.title }}</span>
-	                	</td>
-	                	<td class="centered">
-	                		{{ bug.priority }}
-	                	</td>
-	                </tr>
-	            {% endfor %}
-			</tbody>
-		</table>
-	{% endblock %}
+        {% if app.user and is_granted('ROLE_TESTER') %}
+            <a class="add" href="{{ url('bugs_add') }}">Add new bug</a>
+        {% endif %}
+        <table class="sortable">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Project</th>
+                <th class="centered">State</th>
+                <th class="centered">Priority</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for bug in items %}
+                <tr
+                        {% if app.user and is_granted('ROLE_TESTER') or is_granted('ROLE_MANAGER') %}
+                            onclick="document.location = '{{ url('bugs_edit', {'id':bug.id}) }}';"
+                        {% endif %}
+                        >
+                    <td>
+                        {{ bug.title }}
+                    </td>
+                    <td>
+                        {{ bug.project.title }}
+                    </td>
+                    <td>
+                        <span class="bugState centered"
+                              style="background-color:{{ bug.state.color }}">{{ bug.state.title }}</span>
+                    </td>
+                    <td class="centered">
+                        {{ bug.priority }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
